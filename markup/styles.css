@@ -1,0 +1,43 @@
+.filter-container {
+  padding-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-item {
+  padding: 7px 20px;
+  margin: 0 20px;
+  display: inline-block;
+
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+  font-weight: bolder;
+
+  outline: 2px solid dimgray;
+  color: dimgray;
+}
+
+.filter-item:hover {
+  background-color: dimgray;
+  color: white;
+}
+
+.filter-item__active {
+  background-color: dimgray;
+  color: white;
+}
+
+.gallery-container {
+  padding: 40px 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gallery-item {
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
