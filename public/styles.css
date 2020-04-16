@@ -17,6 +17,7 @@
 
   outline: 2px solid dimgray;
   color: dimgray;
+  cursor: default;
 }
 
 .filter-item:hover {
