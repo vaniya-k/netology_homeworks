@@ -6,7 +6,7 @@ const FilterItem = ({filterName, isActive, onFilterButtonClick}) => {
   )
 }
 
-const Toolbar = ({filters, activeFilter, onFilterButtonClick}) => {
+const Filter = ({filters, activeFilter, onFilterButtonClick}) => {
   return(
     <div className="filter-container">
       {filters.map((filter, i) => 
@@ -21,4 +21,4 @@ const Toolbar = ({filters, activeFilter, onFilterButtonClick}) => {
   )
 };
 
-export default Toolbar;
+export default Filter;
