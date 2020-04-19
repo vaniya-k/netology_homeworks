@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ShopItemFunc from './ShopItemFunc.jsx';
+import ShopItemClass from './ShopItemClass.jsx';
 
 const App = ({item}) => {
   return(
@@ -10,7 +10,7 @@ const App = ({item}) => {
         <div className='highlight-overlay'></div>
       </div>
       <div className="window">
-        <ShopItemFunc item={item}/>
+        <ShopItemClass item={item}/>
       </div>
     </div>
   )
