@@ -7,7 +7,7 @@ const LIST_TYPES = [`view_list`, `view_module`]
 const IconSwitch = ({activeListType, onIconClick}) => {
  return (
   <div className="view-icon">
-    <i className="material-icons md-48" onClick={() => onIconClick()}>
+    <i className="material-icons md-48" onClick={onIconClick}>
       {LIST_TYPES[activeListType]}
     </i>
   </div>
