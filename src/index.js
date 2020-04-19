@@ -1,40 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ItemsList from './ItemsList.jsx';
+import App from './App.jsx';
 
-const products = [{
-  name: "Nike Metcon 2",
-  price: "130",
-  color: "red",
-  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/1.jpg"
-}, {
-  name: "Nike Metcon 2",
-  price: "130",
-  color: "green",
-  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/2.jpg"
-}, {
-  name: "Nike Metcon 2",
-  price: "130",
-  color: "blue",
-  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/3.jpg"
-}, {
-  name: "Nike Metcon 2",
-  price: "130",
-  color: "black",
-  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/4.jpg"
-},{
-  name: "Nike Metcon 2",
-  price: "130",
-  color: "red",
-  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/1.jpg"
-}, {
-  name: "Nike Metcon 2",
-  price: "130",
-  color: "green",
-  img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/2.jpg"
-}];
+const item = {
+  brand: 'Tiger of Sweden',
+  title: 'Leonard coat',
+  description: 'Minimalistic coat in cotton-blend',
+  descriptionFull: 'Men\'s minimalistic overcoat in cotton-blend. Features a stand-up collar, concealed front closure and single back vent. Slim fit with clean, straight shape. Above-knee length.',
+  price: 399,
+  currency: '£'
+};
 
 ReactDOM.render(
-    <ItemsList products={products}/>,
+    <App item={item}/>,
   document.getElementById('root')
 );
