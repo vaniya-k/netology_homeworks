@@ -2,7 +2,7 @@ import React from 'react';
 import CardsList from './CardsList.jsx';
 import StripesList from './StripesList.jsx';
 
-const LIST_TYPES = [`view_list`, `view_module`]
+const LIST_TYPES = [`view_list`, `view_module`];
 
 const IconSwitch = ({activeListType, onIconClick}) => {
  return (
@@ -12,7 +12,7 @@ const IconSwitch = ({activeListType, onIconClick}) => {
     </i>
   </div>
  )
-}
+};
 
 class ItemsList extends React.PureComponent {
   constructor(props) {
@@ -21,16 +21,14 @@ class ItemsList extends React.PureComponent {
     this.state = {
       activeListType: 0
     }
-
-    this.handleListTypeSwitch = this.handleListTypeSwitch.bind(this);
   }
 
   handleListTypeSwitch = () => {
     let newValue = 0;
     
     if (this.state.activeListType === 0) {
-      newValue = 1;
-    }
+      newValue = 1
+    };
 
     this.setState({
       activeListType: newValue
@@ -44,6 +42,6 @@ class ItemsList extends React.PureComponent {
     </React.Fragment>
   }
 
-}
+};
 
 export default ItemsList;
