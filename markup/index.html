@@ -8,20 +8,31 @@
 </head>
   <body>
     <div id="root">
-      <div class="converter-wrapper">
-        <div class="converter-controls">
-          <div class="converter-controls-left">
-            <form class="coverter-input">
-              <input type="text" placeholder="hex color code &ndash; start with #">
-            </form>
-          </div>
-          <div class="converter-controls-right">
-            <div class="converter-output">test</div>
-          </div>
+      <div class="steps-counter-wrapper">
+        <div class="steps-counter-controls">
+          <form action="#">
+            <label for="date">Enter a date (DD.MM.YY)</label>
+            <br>
+            <input type="text" id="date"></input>
+            <br>
+            <br>
+            <label for="steps">Enter steps quantity</label>
+            <br>
+            <input type="text" id="steps"></input>
+            <br>
+            <br>
+            <br>
+            <button>OK</button>
+          </form>
         </div>
-        <br>
-        <br>
-        <div class="converter-color-field" style="background-color:black"></div>
+        <div class="steps-counter-output">
+          <span>Statistics: date/steps</span>
+          <ul>
+            <li>22.09.19 / 1548&nbsp;&nbsp;&nbsp;&nbsp;<button>X</button></li>
+            <li>21.09.19 / 1234</li>
+            <li>20.09.19 / 1437</li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>

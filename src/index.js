@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HexColorConverter from './HexColorConverter.jsx';
+import StepsCounter from './StepsCounter.jsx';
 
 ReactDOM.render(
-    <HexColorConverter/>,
+    <StepsCounter/>,
   document.getElementById('root')
 );
