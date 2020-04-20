@@ -9,13 +9,69 @@ class StepsCounter extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.dateInput = React.createRef();
-    this.stepsInput = React.createRef();
+    this.dateRef = React.createRef();
+    this.stepsRef = React.createRef();
 
     this.state = {
       records: [],
       dateInputIsValid: null,
       stepsInputIsValid: null
+    }
+  }
+
+  editRecords = (date, steps) => {
+    const dateMatchIndex = this.state.records.findIndex((record) => record.date === date)
+
+    let recordsTemp = this.state.records;
+    
+    if(dateMatchIndex >= 0) {
+      recordsTemp[dateMatchIndex].steps = Number.parseInt(recordsTemp[dateMatchIndex].steps) + Number.parseInt(steps);
+    } else {
+      recordsTemp = [...recordsTemp, {date: date, steps: steps}]
+    }
+
+    recordsTemp = recordsTemp.sort((a, b) => {
+      let usaDateA = a.date.slice(3,6) + a.date.slice(0,2) + a.date.slice(5);
+      let usaDateB = b.date.slice(3,6) + b.date.slice(0,2) + b.date.slice(5);
+      let compareValue;
+
+      if (Date.parse(usaDateA) > Date.parse(usaDateB)) {
+        compareValue = -1
+      } else {
+        compareValue = 1
+      };
+
+      return compareValue
+    })
+
+    this.setState({
+      records: recordsTemp
+    });
+
+    this.forceUpdate()
+  }
+
+  handleRemoveRecord = (date) => {
+    const dateMatchIndex = this.state.records.findIndex((record) => record.date === date)
+
+    let recordsTemp = this.state.records;
+
+    recordsTemp = recordsTemp.filter((record, i) => {
+      if(i !== dateMatchIndex) {
+        return record
+      }
+    });
+
+    this.setState({
+      records: recordsTemp
+    });
+  }
+
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    if(this.state.dateInputIsValid === true && this.state.stepsInputIsValid === true) {
+      this.editRecords(this.dateRef.current.value, this.stepsRef.current.value)
     }
   }
 
@@ -39,8 +95,6 @@ class StepsCounter extends React.PureComponent {
 
   handleStepsInput = (evt) => {
     const val = evt.target.value;
-
-    console.log(val)
 
     if(Number.parseInt(val.slice(0,1)) === 0 || STEPS_REGEXP.test(val) === false) {
       this.setState({
@@ -66,26 +120,29 @@ class StepsCounter extends React.PureComponent {
               {(this.state.dateInputIsValid === false) ? `Error!` : `DD.MM.YYYY to log a day`}
             </label>
             <br></br>
-            <input type="text" id="date" ref={this.dateInput} onChange={this.handleDateInput}></input>
+            <input type="text" id="date" ref={this.dateRef} onChange={this.handleDateInput}></input>
             <br></br>
             <br></br>
             <label htmlFor="steps">
-              {(this.state.stepsInputIsValid === false) ? `Error!` : `Steps quantity for that day`}
+              {(this.state.stepsInputIsValid === false) ? `Error!` : `Add steps walked on that day`}
             </label>
             <br></br>
-            <input type="text" id="steps" ref={this.stepsInput} onChange={this.handleStepsInput}></input>
+            <input type="text" id="steps" ref={this.stepsRef} onChange={this.handleStepsInput}></input>
             <br></br>
             <br></br>
             <br></br>
-            <button>Submit!</button>
+            <button onClick={this.handleSubmit}>Submit!</button>
           </form>
         </div>
         <div className="steps-counter-output">
-          <span>Statistics: date/steps</span>
+          <span>Statistics: date / steps</span>
           <ul>
-            <li>22.09.19 / 1548&nbsp;&nbsp;&nbsp;&nbsp;<button>X</button></li>
-            <li>21.09.19 / 1234</li>
-            <li>20.09.19 / 1437</li>
+            {(this.state.records.length === 0)
+              ? <li>Log at least one day</li>
+              : this.state.records.map((record, i) => 
+                <li key={`key${i}`}>{`${record.date} / ${record.steps}`}<button onClick={() => this.handleRemoveRecord(record.date)}>X</button></li>
+              )
+            }
           </ul>
         </div>
       </div>
