@@ -67,8 +67,6 @@ class HexColorConverter extends React.PureComponent {
             </div>
           </div>
         </div>
-        <br></br>
-        <br></br>
         <div
           className="converter-color-field"
           style={(this.state.rgbValue.length === 3)
