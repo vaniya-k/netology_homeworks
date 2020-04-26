@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HexColorConverter from './HexColorConverter.jsx';
+import Stars from './Stars.jsx';
 
 ReactDOM.render(
-    <HexColorConverter/>,
+    <Stars count={4}/>,
   document.getElementById('root')
 );
