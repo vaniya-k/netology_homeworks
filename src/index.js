@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import StepsCounter from './StepsCounter.jsx';
+import StepsCounterControlsWrapper from './StepsCounterControlsWrapper.jsx';
 
 ReactDOM.render(
-    <StepsCounter/>,
+    <StepsCounterControlsWrapper/>,
   document.getElementById('root')
 );

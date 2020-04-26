@@ -1,11 +1,12 @@
 import React from 'react';
+import StepsCounterList from './StepsCounterList.jsx';
 
 const DOTTED_XXMMYYYY_REGEXP = /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 
 const STEPS_REGEXP = /^([0-9]{0,5})$/
 
 
-class StepsCounter extends React.PureComponent {
+class StepsCounterControlsWrapper extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -119,35 +120,18 @@ class StepsCounter extends React.PureComponent {
             <label htmlFor="date">
               {(this.state.dateInputIsValid === false) ? `Error!` : `DD.MM.YYYY to log a day`}
             </label>
-            <br></br>
             <input type="text" id="date" ref={this.dateRef} onChange={this.handleDateInput}></input>
-            <br></br>
-            <br></br>
             <label htmlFor="steps">
               {(this.state.stepsInputIsValid === false) ? `Error!` : `Add steps walked on that day`}
             </label>
-            <br></br>
             <input type="text" id="steps" ref={this.stepsRef} onChange={this.handleStepsInput}></input>
-            <br></br>
-            <br></br>
-            <br></br>
             <button onClick={this.handleSubmit}>Submit!</button>
           </form>
         </div>
-        <div className="steps-counter-output">
-          <span>Statistics: date / steps</span>
-          <ul>
-            {(this.state.records.length === 0)
-              ? <li>Log at least one day</li>
-              : this.state.records.map((record, i) => 
-                <li key={`key${i}`}>{`${record.date} / ${record.steps}`}<button onClick={() => this.handleRemoveRecord(record.date)}>X</button></li>
-              )
-            }
-          </ul>
-        </div>
+        <StepsCounterList records={this.state.records} onRemoveButtonClick={this.handleRemoveRecord}/>
       </div>
     )
   }
 };
 
-export default StepsCounter;
+export default StepsCounterControlsWrapper;
