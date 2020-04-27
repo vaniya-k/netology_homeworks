@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 import Stars from './Stars.jsx';
 
 ReactDOM.render(
-    <Stars count={4}/>,
+    <Stars count={3}/>,
   document.getElementById('root')
 );

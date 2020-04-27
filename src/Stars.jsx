@@ -12,19 +12,19 @@ const Star = () => {
 };
 
 const Stars = ({count}) => {
-  if (Number.isInteger(count) !== true || count <= 0 || count > 5) {
-    return null;
-  } else {
-    let starsToRender = [];
+  const starsToRender = []
+
+  if (count >= 0 && count < 6) {
     for (let i = 0; i < count; i++) {
       starsToRender.push(<Star key={`key${i}`}/>)
     }
-    return (
-      <ul className="card-body-stars u-clearfix" style={{listStyleType: `none`}}>
-        {starsToRender}
-      </ul>
-    )
   }
+
+  return (
+    <ul className="card-body-stars u-clearfix" style={{listStyleType: `none`}}>
+      {(starsToRender.length === 0) ? null : starsToRender}
+    </ul>
+  )
 };
 
 export default Stars;
