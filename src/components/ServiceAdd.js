@@ -35,10 +35,10 @@ function ServiceAdd() {
 	}
 
 	return (
-		<form>
-			<input name='name' onChange={handleNameChange} value={item.name} />
-			<input name='price' onChange={handlePriceChange} value={item.price} />
-			<button onClick={handleSubmit}>Save</button>
+		<form style={{marginBottom: `10px`}}>
+			<input name='name' onChange={handleNameChange} value={item.name} placeholder="название услуги" style={{marginRight: `5px`}}/>
+			<input name='price' onChange={handlePriceChange} value={item.price} placeholder="цена услуги (только число)" style={{marginRight: `15px`}}/>
+			<button onClick={handleSubmit} style={{marginRight: `5px`}}>Save</button>
 			<button onClick={handleCancel}>Cancel</button>
 		</form>
 	);
