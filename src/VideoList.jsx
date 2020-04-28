@@ -11,7 +11,7 @@ function Video(props) {
 }
 
 function VideoList(props) {
-    return props.list.map((item, i) => <WithDatePrettifier><Video key={`key${i}`} url={item.url} date={item.date}/></WithDatePrettifier>);
+    return props.list.map((item, i) => <WithDatePrettifier key={`key${i}`} ><Video url={item.url} date={item.date}/></WithDatePrettifier>);
 }
 
 export default VideoList;
