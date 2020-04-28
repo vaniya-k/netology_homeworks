@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {nanoid} from 'nanoid';
 import Video from './Video.jsx';
 import Article from './Article.jsx';
 import WithNewWrapper from './WithNewWrapper.jsx';
@@ -8,16 +9,16 @@ function List(props) {
     function applyWrapperIfNeeded(item) {
         if (item.views > 1000) {
             return (item.type === `video`)
-                ? <WithPopularWrapper><Video {...item}/></WithPopularWrapper>  
-                : <WithPopularWrapper><Article {...item}/></WithPopularWrapper>  
+                ? <WithPopularWrapper key={nanoid()}><Video {...item}/></WithPopularWrapper>  
+                : <WithPopularWrapper key={nanoid()}><Article {...item}/></WithPopularWrapper>  
         } else if (item.views < 100) {
             return (item.type === `video`)
-                ? <WithNewWrapper><Video {...item}/></WithNewWrapper>  
-                : <WithNewWrapper><Article {...item}/></WithNewWrapper>  
+                ? <WithNewWrapper key={nanoid()}><Video {...item}/></WithNewWrapper>  
+                : <WithNewWrapper key={nanoid()}><Article {...item}/></WithNewWrapper>  
         } else {
             return (item.type === `video`)
-                ? <Video {...item}/>  
-                : <Article {...item}/>
+                ? <Video key={nanoid()} {...item}/>  
+                : <Article  key={nanoid()} {...item}/>
         }
     };
     
