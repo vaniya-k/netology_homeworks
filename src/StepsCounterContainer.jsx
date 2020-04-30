@@ -1,12 +1,13 @@
 import React from 'react';
 import StepsCounterList from './StepsCounterList.jsx';
+import StepsCounterControls from './StepsCounterControls.jsx';
 
 const DOTTED_XXMMYYYY_REGEXP = /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 
 const STEPS_REGEXP = /^([0-9]{0,5})$/
 
 
-class StepsCounterControlsWrapper extends React.PureComponent {
+class StepsCounterContainer extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -18,6 +19,10 @@ class StepsCounterControlsWrapper extends React.PureComponent {
       dateInputIsValid: null,
       stepsInputIsValid: null
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDateInput = this.handleDateInput.bind(this);
+    this.handleStepsInput = this.handleStepsInput.bind(this);
   }
 
   editRecords = (date, steps) => {
@@ -115,23 +120,19 @@ class StepsCounterControlsWrapper extends React.PureComponent {
   render() {
     return (
       <div className="steps-counter-wrapper">
-        <div className="steps-counter-controls">
-          <form action="#">
-            <label htmlFor="date">
-              {(this.state.dateInputIsValid === false) ? `Error!` : `DD.MM.YYYY to log a day`}
-            </label>
-            <input type="text" id="date" ref={this.dateRef} onChange={this.handleDateInput}></input>
-            <label htmlFor="steps">
-              {(this.state.stepsInputIsValid === false) ? `Error!` : `Add steps walked on that day`}
-            </label>
-            <input type="text" id="steps" ref={this.stepsRef} onChange={this.handleStepsInput}></input>
-            <button onClick={this.handleSubmit}>Submit!</button>
-          </form>
-        </div>
+        <StepsCounterControls
+          dateRef={this.dateRef}
+          stepsRef={this.stepsRef}
+          dateInputIsValid={this.state.dateInputIsValid}
+          stepsInputIsValid={this.state.stepsInputIsValid}
+          onDateInputChange={this.handleDateInput}
+          onStepsInputChange={this.handleStepsInput}
+          onFormSubmit={this.handleSubmit}
+        />
         <StepsCounterList records={this.state.records} onRemoveButtonClick={this.handleRemoveRecord}/>
       </div>
     )
   }
 };
 
-export default StepsCounterControlsWrapper;
+export default StepsCounterContainer;
