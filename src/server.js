@@ -7,47 +7,39 @@ const app = new Koa();
 app.use(cors());
 
 let nextId = 1;
-const services = [
-    { id: nextId++, name: 'Замена стекла', price: 21000, content: 'Стекло оригинал от Apple'},
-    { id: nextId++, name: 'Замена дисплея', price: 25000, content: 'Дисплей оригинал от Foxconn'},
-    { id: nextId++, name: 'Замена аккумулятора', price: 4000, content: 'Новый на 4000 mAh'},
-    { id: nextId++, name: 'Замена микрофона', price: 2500, content: 'Оригинальный от Apple'},
+const skills = [
+    { id: nextId++, name: "React" },
+    { id: nextId++, name: "Redux" },
+    { id: nextId++, name: "Redux Thunk" },
+    { id: nextId++, name: "RxJS" },
+    { id: nextId++, name: "Redux Observable" },
+    { id: nextId++, name: "Redux Saga" },
 ];
 
-const listAllServices = ctx => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if(Math.random() > 0.50) {
-                reject(new Error('Something bad happened'));
-            }
-
-            ctx.response.body = services.map(service => ({id: service.id, name: service.name, price: service.price}));
-            resolve();
-        }, 1500)
-    });
+const showAllSkills = ctx => {
+    ctx.response.body = skills;
 };
 
-const showDetailsById = (ctx, id) => {
+let isEven = true;
+
+const searchSkills = (ctx, searchVal) => {
+    if (Math.random() > 0.75) {
+        ctx.response.status = 500;
+        return;
+    };
+
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if(Math.random() > 0.50) {
-                reject(new Error('Something bad happened'));
-            }
-
-            const index = services.findIndex(service => service.id === Number(id));
-            if (index === -1) {
-                reject(new Error('Not found'));
-            }
-
-            ctx.response.body = services[index];
+            ctx.response.body = skills.filter(skill => skill.name.toLowerCase().includes(searchVal.toLowerCase()) === true);
             resolve();
-        }, 1500)
+        }, isEven ? 1 * 1000 : 3 * 1000);
+        isEven = !isEven;
     });
 }
 
-app.use(route.get('/api/services', listAllServices));
+app.use(route.get('/api', showAllSkills));
 
-app.use(route.get('/api/services/:id', showDetailsById));
+app.use(route.get('/api/search/:searchVal', searchSkills));
 
 const port = 7070;
 const server = http.createServer(app.callback());

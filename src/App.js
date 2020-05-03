@@ -1,13 +1,11 @@
 import React from 'react';
-import ServiceAdd from './components/ServiceAdd';
-import ServiceList from './components/ServiceList';
+import logo from './logo.svg';
+import './App.css';
+import Skills from './Skills';
 
 function App() {
   return (
-    <>
-      <ServiceAdd />
-      <ServiceList />
-    </>
+    <Skills />
   );
 }
 
