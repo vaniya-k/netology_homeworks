@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import ServiceList from './components/ServiceList.js';
 import store from './store';
 import {Provider} from 'react-redux';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ServiceList />
   </Provider>,
   document.getElementById('root'),
 );
+
+store.dispatch({type: 'FETCH_SERVICES_START'});

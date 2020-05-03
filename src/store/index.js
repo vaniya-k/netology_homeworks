@@ -1,15 +1,56 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose, } from "redux";
 import serviceListReducer from '../reducers/serviceList';
-import serviceAddReducer from '../reducers/serviceAdd';
+import apiInteractionReducer from "../reducers/apiInteraction";
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import { serviceListEpic } from '../epics/index.js';
+
 
 const reducer = combineReducers({
   serviceList: serviceListReducer,
-  serviceAdd: serviceAddReducer,
+  apiInteraction: apiInteractionReducer
 });
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const epic = combineEpics(
+  serviceListEpic
 );
 
+const epicMiddleware = createEpicMiddleware();
+
+const store = createStore(reducer, composeEnhancers(
+  applyMiddleware(epicMiddleware)
+));
+
+epicMiddleware.run(epic);
+
 export default store;
+
+
+
+
+// import { createStore, combineReducers, applyMiddleware, compose, } from 'redux';
+// import { combineEpics, createEpicMiddleware } from 'redux-observable';
+// import skillsReducer from '../reducers/skills';
+// import { changeSearchEpic, searchSkillsEpic } from '../epics';
+
+// const reducer = combineReducers({
+//   skills: skillsReducer,
+// });
+
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// const epic = combineEpics(
+//   changeSearchEpic,
+//   searchSkillsEpic,
+// );
+
+// const epicMiddleware = createEpicMiddleware();
+
+// const store = createStore(reducer, composeEnhancers(
+//   applyMiddleware(epicMiddleware)
+// ));
+
+// epicMiddleware.run(epic);
+
+// export default store;
