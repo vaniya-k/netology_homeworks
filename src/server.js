@@ -17,7 +17,7 @@ const services = [
 const listAllServices = ctx => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if(Math.random() > 0.50) {
+            if(Math.random() > 0.5) {
                 reject(new Error('Something bad happened'));
             }
 
@@ -30,7 +30,7 @@ const listAllServices = ctx => {
 const showDetailsById = (ctx, id) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if(Math.random() > 0.50) {
+            if(Math.random() > 0.5) {
                 reject(new Error('Something bad happened'));
             }
 

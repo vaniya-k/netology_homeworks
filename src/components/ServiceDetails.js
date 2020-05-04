@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {CHANGE_FOCUSED_ITEM_ID, FETCH_DETAILS_START} from '../actions/actionTypes';
+import {CHANGE_FOCUSED_ITEM_ID} from '../actions/actionTypes';
 
 function decideWhatToRender(isLoading, didFail, name, price, content, handleReload) {
   if(didFail && isLoading === false) {
@@ -27,7 +27,6 @@ function ServiceDetails() {
   const dispatch = useDispatch();
 
   const handleReload = () => {
-    dispatch({type: FETCH_DETAILS_START});
     dispatch({type: CHANGE_FOCUSED_ITEM_ID, payload: {id: id}})
   };
 
