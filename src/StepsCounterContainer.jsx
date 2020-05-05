@@ -2,28 +2,45 @@ import React from 'react';
 import StepsCounterList from './StepsCounterList.jsx';
 import StepsCounterControls from './StepsCounterControls.jsx';
 
-const DOTTED_XXMMYYYY_REGEXP = /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
-
-const STEPS_REGEXP = /^([0-9]{0,5})$/
-
 
 class StepsCounterContainer extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.dateRef = React.createRef();
-    this.stepsRef = React.createRef();
-
     this.state = {
       records: [],
       dateInputIsValid: null,
-      stepsInputIsValid: null
-    }
+      dateInputValue: null,
+      stepsInputIsValid: null,
+      stepsInputValue: null
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDateInput = this.handleDateInput.bind(this);
-    this.handleStepsInput = this.handleStepsInput.bind(this);
   }
+
+  editStepsValues = (newStatus, steps = null) => {
+    if (steps !== null) {
+      this.setState({
+        stepsInputValue: steps
+      })
+    }
+
+    this.setState({
+      stepsInputIsValid: newStatus
+    })
+  };
+
+  editDateValues = (newStatus, date = null) => {
+    if(date !== null) {
+      this.setState({
+        dateInputValue: date
+      })
+    };
+
+    this.setState({
+      dateInputIsValid: newStatus
+    })
+  };
 
   editRecords = (date, steps) => {
     const dateMatchIndex = this.state.records.findIndex((record) => record.date === date)
@@ -77,57 +94,19 @@ class StepsCounterContainer extends React.PureComponent {
     evt.preventDefault();
 
     if(this.state.dateInputIsValid === true && this.state.stepsInputIsValid === true) {
-      this.editRecords(this.dateRef.current.value, this.stepsRef.current.value)
+      this.editRecords(this.state.dateInputValue, this.state.stepsInputValue)
     }
-  }
-
-  handleDateInput = (evt) => {
-    const val = evt.target.value;
-
-    if(DOTTED_XXMMYYYY_REGEXP.test(val) === true) {
-      this.setState({
-        dateInputIsValid: true
-      })
-    } else if(val.length >= 10) {
-      this.setState({
-        dateInputIsValid: false
-      })
-    } else {
-      this.setState({
-        dateInputIsValid: null
-      })
-    }
-  }
-
-  handleStepsInput = (evt) => {
-    const val = evt.target.value;
-
-    if(Number.parseInt(val.slice(0,1)) === 0 || STEPS_REGEXP.test(val) === false) {
-      this.setState({
-        stepsInputIsValid: false
-      })
-    } else if(val.length === 0) {
-      this.setState({
-        stepsInputIsValid: null
-      })
-    } else if(STEPS_REGEXP.test(val) === true) {
-      this.setState({
-        stepsInputIsValid: true
-      })
-    }
-  }
+  };
 
   render() {
     return (
       <div className="steps-counter-wrapper">
         <StepsCounterControls
-          dateRef={this.dateRef}
-          stepsRef={this.stepsRef}
           dateInputIsValid={this.state.dateInputIsValid}
           stepsInputIsValid={this.state.stepsInputIsValid}
-          onDateInputChange={this.handleDateInput}
-          onStepsInputChange={this.handleStepsInput}
-          onFormSubmit={this.handleSubmit}
+          editDateValues={this.editDateValues}
+          editStepsValues={this.editStepsValues}
+          onSubmitButtonClick={this.handleSubmit}
         />
         <StepsCounterList records={this.state.records} onRemoveButtonClick={this.handleRemoveRecord}/>
       </div>
