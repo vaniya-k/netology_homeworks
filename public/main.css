@@ -1,43 +1,21 @@
-.steps-counter-wrapper {
+.staff-page-wrapper {
   padding: 100px;
   display: flex;
-  width: 550px;
+  width: 600px;
   justify-content: space-between;
-}
-
-form > button {
-  display: block;
-  margin-top: 10px;
-  height: 30px;
-  width: 80px;
-}
-
-form > input {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  font-weight: 700;
 }
 
 li {
   height: 30px;
 }
 
-li > button {
-  margin-left: 20px;
-}
-
-.steps-counter-output {
-  width: 250px;
-}
-
-.steps-counter-output > ul {
-  margin-top: 30px;
-}
-
-.steps-counter-output > span {
-  float: left;
+li:hover {
+  text-decoration: underline;
   font-weight: 700;
+  cursor: default;
+}
+
+.staff-item-details > span {
+  display: block;
+  height: 30px;
 }

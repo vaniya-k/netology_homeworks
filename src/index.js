@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import StepsCounterContainer from './StepsCounterContainer.jsx';
+import App from './App.jsx';
 
 ReactDOM.render(
-    <StepsCounterContainer/>,
+    <App/>,
   document.getElementById('root')
 );
