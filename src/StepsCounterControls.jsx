@@ -1,10 +1,36 @@
 import React from 'react';
+import {useState} from 'react';
 
 const DOTTED_XXMMYYYY_REGEXP = /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 
 const STEPS_REGEXP = /^([0-9]{0,5})$/;
 
-const StepsCounterControls = ({dateInputIsValid, stepsInputIsValid, editDateValues, editStepsValues, onSubmitButtonClick}) => {
+const StepsCounterControls = ({editRecords}) => {
+
+  const [dateInputIsValid, setDateInputStatus] = useState(null);
+
+  const [stepsInputIsValid, setStepsInputStatus] = useState(null);
+  
+  const [stepsInputValue, setStepsInputValue] = useState(null);
+
+  const [dateInputValue, setDateInputValue] = useState(null);
+
+  const editStepsValues = (newStatus, steps = null) => {
+    if (steps !== null) {
+      setStepsInputValue(steps);
+    }
+
+    setStepsInputStatus(newStatus);
+  };
+
+  const editDateValues = (newStatus, date = null) => {
+    if (date !== null) {
+      setDateInputValue(date);
+    }
+
+    setDateInputStatus(newStatus);
+  };
+
   const handleDateInputChange = (evt) => {
     const val = evt.target.value;
   
@@ -29,6 +55,14 @@ const StepsCounterControls = ({dateInputIsValid, stepsInputIsValid, editDateValu
     }
   };
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    if(dateInputIsValid === true && stepsInputIsValid === true) {
+      editRecords(dateInputValue, stepsInputValue);
+    }
+  };
+
   return (
     <div className="steps-counter-controls">
       <form action="#">
@@ -40,7 +74,7 @@ const StepsCounterControls = ({dateInputIsValid, stepsInputIsValid, editDateValu
           {(stepsInputIsValid === false) ? `Error!` : `Add steps walked on that day`}
         </label>
         <input type="text" id="steps"  onChange={handleStepsInputChange}></input>
-        <button onClick={onSubmitButtonClick}>Submit!</button>
+        <button onClick={handleSubmit}>Submit!</button>
       </form>
     </div>
   )

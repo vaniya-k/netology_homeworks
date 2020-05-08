@@ -1,51 +1,18 @@
 import React from 'react';
+import {useState} from 'react';
 import StepsCounterList from './StepsCounterList.jsx';
 import StepsCounterControls from './StepsCounterControls.jsx';
 
 
-class StepsCounterContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const StepsCounterContainer = () => {
+  const [records, setRecords] = useState([]);
 
-    this.state = {
-      records: [],
-      dateInputIsValid: null,
-      dateInputValue: null,
-      stepsInputIsValid: null,
-      stepsInputValue: null
-    };
+  const [reRenderCounter, reRenderTrigger] = useState(0);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  const editRecords = (date, steps) => {
+    const dateMatchIndex = records.findIndex((record) => record.date === date)
 
-  editStepsValues = (newStatus, steps = null) => {
-    if (steps !== null) {
-      this.setState({
-        stepsInputValue: steps
-      })
-    }
-
-    this.setState({
-      stepsInputIsValid: newStatus
-    })
-  };
-
-  editDateValues = (newStatus, date = null) => {
-    if(date !== null) {
-      this.setState({
-        dateInputValue: date
-      })
-    };
-
-    this.setState({
-      dateInputIsValid: newStatus
-    })
-  };
-
-  editRecords = (date, steps) => {
-    const dateMatchIndex = this.state.records.findIndex((record) => record.date === date)
-
-    let recordsTemp = this.state.records;
+    let recordsTemp = records;
     
     if(dateMatchIndex >= 0) {
       recordsTemp[dateMatchIndex].steps = Number.parseInt(recordsTemp[dateMatchIndex].steps) + Number.parseInt(steps);
@@ -67,17 +34,15 @@ class StepsCounterContainer extends React.PureComponent {
       return compareValue
     })
 
-    this.setState({
-      records: recordsTemp
-    });
+    setRecords(recordsTemp);
+    
+    reRenderTrigger(reRenderCounter + 1);
+  };
 
-    this.forceUpdate()
-  }
+  const handleRemoveRecord = (date) => {
+    const dateMatchIndex = records.findIndex((record) => record.date === date)
 
-  handleRemoveRecord = (date) => {
-    const dateMatchIndex = this.state.records.findIndex((record) => record.date === date)
-
-    let recordsTemp = this.state.records;
+    let recordsTemp = records;
 
     recordsTemp = recordsTemp.filter((record, i) => {
       if(i !== dateMatchIndex) {
@@ -85,33 +50,15 @@ class StepsCounterContainer extends React.PureComponent {
       }
     });
 
-    this.setState({
-      records: recordsTemp
-    });
-  }
-
-  handleSubmit = (evt) => {
-    evt.preventDefault();
-
-    if(this.state.dateInputIsValid === true && this.state.stepsInputIsValid === true) {
-      this.editRecords(this.state.dateInputValue, this.state.stepsInputValue)
-    }
+    setRecords(recordsTemp);
   };
 
-  render() {
-    return (
-      <div className="steps-counter-wrapper">
-        <StepsCounterControls
-          dateInputIsValid={this.state.dateInputIsValid}
-          stepsInputIsValid={this.state.stepsInputIsValid}
-          editDateValues={this.editDateValues}
-          editStepsValues={this.editStepsValues}
-          onSubmitButtonClick={this.handleSubmit}
-        />
-        <StepsCounterList records={this.state.records} onRemoveButtonClick={this.handleRemoveRecord}/>
-      </div>
-    )
-  }
+  return (
+    <div className="steps-counter-wrapper">
+      <StepsCounterControls editRecords={editRecords}/>
+      <StepsCounterList records={records} onRemoveButtonClick={handleRemoveRecord}/>
+    </div>
+  );
 };
 
 export default StepsCounterContainer;
