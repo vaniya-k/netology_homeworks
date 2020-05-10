@@ -1,5 +1,5 @@
 {
-  "name": "9-1",
+  "name": "9-2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,13 +8,20 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "forever": "^1.0.0",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api-start": "forever ./src/server.js",
+    "api-watch": "forever -w ./src/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
