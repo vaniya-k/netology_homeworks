@@ -15,7 +15,7 @@ export default function useJsonFetch(url) {
         throw new Error(response.status);
       })
       .then(data => {setData(JSON.stringify(data)); setLoading(false)})
-      .catch(error => {setError(error); setLoading(false)})
+      .catch(error => {setError(error.message); setLoading(false)})
   }, []);
 
   return [data, error, loading];
