@@ -1,6 +1,5 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import FocusedIdContext from './contexts/FocusedIdContext.js';
 
 const DetailsView = ({focusedId}) => {
   const [detailsDataSet, setDetailsDataSet] = useState([]);
@@ -33,16 +32,12 @@ const DetailsView = ({focusedId}) => {
   )
 };
 
-const TopStaffDetails = () => {
+const TopStaffListingHighlight = ({focusedId}) => {
   return (
-    <FocusedIdContext.Consumer>
-      {context => (
-        (context.focusedId === null)
-        ? null
-        : <DetailsView focusedId={context.focusedId}/>
-      )}
-    </FocusedIdContext.Consumer>
+    <>
+      {focusedId !== null && <DetailsView focusedId={focusedId}/>}
+    </>
   )
 }
 
-export default TopStaffDetails;
+export default TopStaffListingHighlight;

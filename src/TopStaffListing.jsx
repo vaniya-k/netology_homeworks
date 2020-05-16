@@ -1,6 +1,5 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import FocusedIdContext from './contexts/FocusedIdContext.js';
 
 const LiItem = ({id, isFocused, name, onStaffLiItemClick}) => {
   return (
@@ -8,7 +7,7 @@ const LiItem = ({id, isFocused, name, onStaffLiItemClick}) => {
   )
 }
 
-const TopStaffList = () => {
+const TopStaffListing = ({focusedId, setFocusedId}) => {
   const [staffList, setStaffList] = useState([]);
 
   useEffect(() => {
@@ -24,18 +23,15 @@ const TopStaffList = () => {
           : <>
             <h4>Our top staff</h4>
             <ul>
-              <FocusedIdContext.Consumer>
-                {context => (
-                  staffList.map(person =>
-                  <LiItem
-                    key={person.id}
-                    id={person.id}
-                    name={person.name}
-                    onStaffLiItemClick={context.setFocusedId}
-                    isFocused={(person.id === context.focusedId) ? true : false}
-                  />)
-                )}
-              </FocusedIdContext.Consumer>
+              {staffList.map(person =>
+                <LiItem
+                  key={person.id}
+                  id={person.id}
+                  name={person.name}
+                  onStaffLiItemClick={setFocusedId}
+                  isFocused={(person.id === focusedId) ? true : false}
+                />)
+              }
             </ul>
           </>
         }
@@ -43,4 +39,4 @@ const TopStaffList = () => {
   )
 };
 
-export default TopStaffList;
+export default TopStaffListing;
