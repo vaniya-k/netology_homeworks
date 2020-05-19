@@ -1,14 +1,14 @@
 import React from 'react';
 import Weather from './Weather';
-import Popular from './Popular';
-import TvSchedule from './TvSchedule'
+import Popular from './List';
+import TvSchedule from './List'
 
 const NewsZone = () => {
   return (
     <div style={{display: `flex`, width: `800px`, justifyContent: `space-evenly`, marginBottom: `30px`, backgroundColor: `lavender`}}>
         <Weather currentTemp={`+11`} nextTemp={`+5`} nextNextTemp={`+9`}/>
-        <Popular highlights={[{category: `Вино`, title: `Вы не поверите, что к нему подходит!`},{category: `Домино`, title: `Подозрительная догадливость...`}]}/>
-        <TvSchedule shows={[{time: `44:44`, title: `Дом 17`, channel: `ТНТ`}, {time: `55:55`, title: `Спокойной ночи, голопузы`, channel: `СТС`}]}/>
+        <Popular categoryTitle={`ПОПУЛЯРНОЕ`} items={[{intro: `Вино`, text: `/  Вы не поверите, что к нему подходит!`},{intro: `Домино`, text: `/  Подозрительная догадливость...`}]}/>
+        <TvSchedule categoryTitle={`ТЕЛЕПРОГРАММА`} items={[{intro: `44:44`, text: `/  Дом 17  /  ТНТ`}, {intro: `55:55`, text: `/  Спокойной ночи, голопузы  /  СТС`}]}/>
     </div>
   )
 };
