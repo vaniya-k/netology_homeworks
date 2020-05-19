@@ -5,7 +5,7 @@ const App = () => {
   return (
     <>
     <Card/>
-    <Card>{{img: `https://pbs.twimg.com/profile_images/3119746052/b84bbd1707018b90df39765df7a9ecee.jpeg`}}</Card>
+    <Card><img src="https://pbs.twimg.com/profile_images/3119746052/b84bbd1707018b90df39765df7a9ecee.jpeg" className="card-img-top" alt="..."></img></Card>
     </>
   )
 };
